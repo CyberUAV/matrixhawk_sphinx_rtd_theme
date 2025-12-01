@@ -40,11 +40,11 @@ def extend_html_context(app, pagename, templatename, context, doctree):
 # See http://www.sphinx-doc.org/en/stable/theming.html#distribute-your-theme-as-a-python-package
 def setup(app):
     if python_version[0] < 3:
-        logger.error("Python 2 is not supported with sphinx_rtd_theme, update to Python 3.")
+        logger.error("Python 2 is not supported with matrixhawk_sphinx_rtd_theme, update to Python 3.")
 
     app.require_sphinx('5.0')
     if app.config.html4_writer:
-        logger.error("'html4_writer' is not supported with sphinx_rtd_theme.")
+        logger.error("'html4_writer' is not supported with matrixhawk_sphinx_rtd_theme.")
 
     # Since Sphinx 6, jquery isn't bundled anymore and we need to ensure that
     # the sphinxcontrib-jquery extension is enabled.

@@ -1,5 +1,5 @@
 {
-  "name": "sphinx_rtd_theme",
+  "name": "matrixhawk-sphinx-rtd-theme",
   "main": "js/theme.js",
   "version": "2.0.0",
   "scripts": {
@@ -9,15 +9,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/readthedocs/sphinx_rtd_theme.git"
+    "url": "https://github.com/CyberUAV/matrixhawk_sphinx_rtd_theme.git"
   },
   "author": "Read the Docs",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/readthedocs/sphinx_rtd_theme/issues"
+    "url": "https://github.com/CyberUAV/matrixhawk_sphinx_rtd_theme/issues"
   },
-  "homepage": "https://github.com/readthedocs/sphinx_rtd_theme",
-  "dependencies": {},
+  "homepage": "https://github.com/CyberUAV/matrixhawk_sphinx_rtd_theme",
+  "overrides": {
+    "node-sass": "^9.0.0"
+  },
   "devDependencies": {
     "bourbon": "~4.3",
     "bourbon-neat": "~1.9",
@@ -30,10 +32,10 @@
     "jquery": "^3.6.0",
     "lato-font": "^3.0.0",
     "mini-css-extract-plugin": "^0.6.0",
-    "node-sass": "^4.14.1",
+    "node-sass": "^9.0.0",
     "optimize-css-assets-webpack-plugin": "^5.0.4",
     "roboto-fontface": "^0.10.0",
-    "sass-loader": "^7.3.0",
+    "sass-loader": "^10.2.0",
     "style-loader": "^0.23.1",
     "webpack": "^4.46.0",
     "webpack-cli": "^3.3.12",

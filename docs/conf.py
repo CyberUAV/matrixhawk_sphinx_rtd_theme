@@ -9,8 +9,8 @@ import re
 sys.path.insert(0, os.path.abspath('..'))
 sys.path.append(os.path.abspath('./demo/'))
 
-from sphinx_rtd_theme import __version__ as theme_version
-from sphinx_rtd_theme import __version_full__ as theme_version_full
+from matrixhawk_sphinx_rtd_theme import __version__ as theme_version
+from matrixhawk_sphinx_rtd_theme import __version_full__ as theme_version_full
 from sphinx.locale import _
 
 project = u'Read the Docs Sphinx Theme'
@@ -27,7 +27,7 @@ extensions = [
     'sphinx.ext.autosummary',
     'sphinx.ext.mathjax',
     'sphinx.ext.viewcode',
-    'sphinx_rtd_theme',
+    'matrixhawk_sphinx_rtd_theme',
 ]
 
 templates_path = ['_templates']

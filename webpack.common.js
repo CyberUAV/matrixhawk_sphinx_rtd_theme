@@ -9,7 +9,7 @@ module.exports = {
   },
   output: {
     filename: "js/[name].js?[hash]",
-    path: path.resolve(__dirname, "sphinx_rtd_theme/static")
+    path: path.resolve(__dirname, "matrixhawk_sphinx_rtd_theme/static")
   },
   externals: {
     jquery: "jQuery"
@@ -34,14 +34,18 @@ module.exports = {
             loader: "css-loader"
           },
           {
-            loader: "sass-loader?indentedSyntax",
+            loader: "sass-loader",
             options: {
-              includePaths: [
-                "node_modules/bourbon/app/assets/stylesheets",
-                "node_modules/bourbon-neat/app/assets/stylesheets",
-                "node_modules/font-awesome/scss",
-                "node_modules/wyrm/sass"
-              ]
+              implementation: require("node-sass"),
+              sassOptions: {
+                indentedSyntax: true,
+                includePaths: [
+                  "node_modules/bourbon/app/assets/stylesheets",
+                  "node_modules/bourbon-neat/app/assets/stylesheets",
+                  "node_modules/font-awesome/scss",
+                  "node_modules/wyrm/sass"
+                ]
+              }
             }
           }
         ]
