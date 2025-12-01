@@ -29,3 +29,21 @@ sphinx_rtd_theme/static/js/html5shiv-printshiv.min.js
 .envrc
 # Used for dockerized builds
 .container_id
+
+# Python virtual environments
+.venv/
+venv/
+ENV/
+env/
+.virtualenv/
+
+# Sphinx documentation builds
+docs/build/
+docs/_build/
+
+# IDE and editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*~

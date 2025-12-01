@@ -9,12 +9,6 @@
   top:38px;
 }
 
-/*
-.wy-nav-content {
-    max-width: 1200px !important;
-}
-*/
-
 .highlight {
   background: none;
 }
@@ -123,7 +117,7 @@
   -o-transition: all 0.25s ease;
   transition: all 0.25s ease;
   border-bottom: 1px solid #1D1D1D;
-  border-top: 1px solid #404040;
+  border-top: 1px solid #231f20;
   border-right: none;
 }
 
@@ -170,7 +164,7 @@
 }
 
 #cssmenu ul ul li:hover > a, #cssmenu ul ul li a:hover, #cssmenu ul ul li a:focus, #cssmenu ul ul li a:active {
-  background: #404040;
+  background: #231f20;
   color: #FFFFFF !important;
   text-decoration: none;
 }
