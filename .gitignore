@@ -17,8 +17,8 @@ local/
 node_modules
 npm-debug.log
 pip-selfcheck.json
-sphinx_rtd_theme/static/fonts/Lato/
-sphinx_rtd_theme/static/fonts/RobotoSlab/
+matrixhawk_sphinx_rtd_theme/static/fonts/Lato/
+matrixhawk_sphinx_rtd_theme/static/fonts/RobotoSlab/
 .python-version
 .node-version
 .tool-versions
