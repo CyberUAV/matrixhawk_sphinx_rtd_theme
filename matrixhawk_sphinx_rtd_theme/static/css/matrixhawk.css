@@ -67,16 +67,6 @@
     min-height: calc(100vh - 60px);
   }
 
-  /* --- 内部：实际内容区 (900px) --- */
-  .wy-nav-content {
-    max-width: 900px !important;    /* 锁定内容宽度 */
-    margin: 0 !important;           /* 不再需要额外 margin */
-    padding: 1.618em 3.236em;       /* 内部留白 */
-    background: #fcfcfc;            /* 内容区白色背景 */
-    box-sizing: border-box;
-  }
-}
-
 /* ==========================================================================
    4. 平板/中等屏幕 (768px - 1199px)
    屏幕不够 1200px 时，容器占满全屏，内容自适应
