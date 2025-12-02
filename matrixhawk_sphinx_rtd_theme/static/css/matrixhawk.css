@@ -1,3 +1,7 @@
+# Copyright (c) 2025 BZUAV Technology Co., Ltd.
+# Licensed under the MIT License.
+
+
 @import url("ardupilot.css");
 
 /* ==========================================================================
@@ -57,7 +61,6 @@
     left: 0 !important;             /* 紧贴容器左边缘 */
     z-index: 200;
     overflow-y: auto;
-    background: #343131;            /* 确保有背景色，防止透视 */
   }
 
   /* --- 右侧：内容包裹器 --- */
@@ -159,8 +162,9 @@
   display: block;
   position: absolute;
   
-  /* ✅ 修改 1：将 Logo 向右推的距离改为 20px */
-  left: 20px !important; 
+  /* ✅ 修改 1：将 Logo 向右推的距离改为 40px */
+  left: 3
+  0px !important; 
   
   top: 50%;
   transform: translateY(-50%);

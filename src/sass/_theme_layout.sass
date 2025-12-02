@@ -50,13 +50,13 @@ html
     &.divide-bottom
       border-bottom: solid 1px hsl(0, 0%, 25%)
     &.current
-      background: darken($menu-vertical-background-color, 10%)
+      background: #E5E5E5
       a
-        color: $menu-link-medium
-        border-right: solid 1px darken($menu-vertical-background-color, 20%)
+        color: $menu-link-active
+        border-right: solid 1px #E5E5E5
         padding: ($gutter / 4) ($gutter * 1.5)
         &:hover
-          background: darken($menu-vertical-background-color, 15%)
+          background: #E0E0E0
     code
       border: none
       background: inherit
@@ -97,8 +97,8 @@ html
       color: darken($menu-link-medium, 30%)
 
   li.toctree-l1.current > a
-    border-bottom: solid 1px darken($menu-vertical-background-color, 20%)
-    border-top: solid 1px darken($menu-vertical-background-color, 20%)
+    border-bottom: solid 1px #E5E5E5
+    border-top: solid 1px #E5E5E5
 
   // This is the on state for pages beyond second level
 
@@ -145,9 +145,9 @@ html
   li.toctree-l2
     &.current
       > a
-        background: darken($menu-vertical-background-color, 20%)
+        background: #E5E5E5
       li.toctree-l3 > a
-        background: darken($menu-vertical-background-color, 20%)
+        background: #E5E5E5
     button.toctree-expand
       color: darken($menu-vertical-background-color, 35%)
   li.toctree-l3
@@ -274,7 +274,7 @@ html
 
 .wy-nav-side
   position: fixed
-  top: 0
+  top: 85px
   bottom: 0
   left: 0
   padding-bottom: 2em
@@ -282,9 +282,13 @@ html
   overflow-x: hidden
   overflow-y: hidden
   min-height: 100%
-  color: $menu-medium
+  color: #333333
   background: $nav-background-color
   z-index: $z-index-popover
+  border-right: 1px solid $sidebar-border-color
+  border-left: 1px solid $sidebar-border-color
+  border-bottom: 1px solid $sidebar-border-color
+  border-top: none
 
 .wy-side-scroll
   width: $nav-desktop-width + 20px
@@ -319,9 +323,21 @@ html
     cursor: pointer
     padding-top: inherit
 
+.wy-nav-secondary
+  position: fixed
+  top: 60px
+  left: 0
+  width: 100%
+  height: 25px
+  line-height: 25px
+  background: #57585A
+  z-index: 400
+  border-bottom: none
+
 .wy-nav-content-wrap
   margin-left: $nav-desktop-width
-  background: $section-background-color
+  margin-top: 25px
+  background: #fbfbfb
   min-height: 100%
 
 .wy-nav-content
@@ -329,6 +345,11 @@ html
   height: 100%
   max-width: $nav-content-width
   margin: auto
+  background: $section-background-color
+  border-right: 1px solid $sidebar-border-color
+  border-left: 1px solid $sidebar-border-color
+  border-bottom: 1px solid $sidebar-border-color
+  border-top: none
 
 .wy-body-mask
   position: fixed

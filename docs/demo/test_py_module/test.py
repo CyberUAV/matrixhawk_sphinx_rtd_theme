@@ -20,10 +20,12 @@ class Foo:
         It is also possible to include definitions inside docstrings.
         They should be styled as a normal definition list.
 
+    Reference to footnote [1]_. Reference to citation [CitationTest]_.
+
     .. [1] A footnote contains body elements, consistently indented by at
        least 3 spaces.
 
-    .. [Citation] A citation contains body elements, consistently indented by at
+    .. [CitationTest] A citation contains body elements, consistently indented by at
        least 3 spaces.
 
     Normal ``<tt>`` (like the <tt> I just wrote here) needs to be shown with
