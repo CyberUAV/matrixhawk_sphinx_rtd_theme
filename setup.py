@@ -86,7 +86,10 @@ class TransifexCommand(distutils.cmd.Command):
 
 
 setup(
-    version='2.0.0',
+    version='0.0.2',
+    # --- 核心修复：必须加这一行！ ---
+    include_package_data=True, 
+    # ----------------------------
     cmdclass={
         'update_translations': UpdateTranslationsCommand,
         'transifex': TransifexCommand,
