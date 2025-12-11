@@ -5,7 +5,7 @@ import os
 import subprocess
 from io import open
 
-from setuptools import setup
+from setuptools import setup, find_packages
 
 
 class WebpackBuildCommand(distutils.cmd.Command):
@@ -85,11 +85,40 @@ class TransifexCommand(distutils.cmd.Command):
         subprocess.run(['tx', 'pull', '--mode', 'onlyreviewed', '-f', '-a'], check=True)
 
 
+# -*- coding: utf-8 -*-
+import distutils.cmd
+import os
+import subprocess
+from io import open
+from setuptools import setup, find_packages
+
+# ... (保留你之前的 Webpack 等 Class 定义，这里省略) ...
+
 setup(
+    name='matrixhawk_sphinx_rtd_theme',
     version='0.0.2',
-    # --- 核心修复：必须加这一行！ ---
-    include_package_data=True, 
-    # ----------------------------
+    
+    # 1. 扫描包：自动找到当前目录下的 matrixhawk_sphinx_rtd_theme 文件夹
+    packages=find_packages(),
+    
+    # 2. 包含资源：确保 theme.conf, .html, .css 被打包
+    include_package_data=True,
+
+    # 3. 依赖声明
+    install_requires=[
+        'sphinx',
+        'docutils',
+    ],
+
+    # 【新增核心配置】注册入口点
+    # 这就是告诉 Sphinx：“嘿，我是一个主题，名字叫 matrixhawk_sphinx_rtd_theme”
+    # 格式为：'主题名 = 包名'
+    entry_points={
+        'sphinx.html_themes': [
+            'matrixhawk_sphinx_rtd_theme = matrixhawk_sphinx_rtd_theme',
+        ],
+    },
+
     cmdclass={
         'update_translations': UpdateTranslationsCommand,
         'transifex': TransifexCommand,
