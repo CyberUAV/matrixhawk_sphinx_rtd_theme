@@ -96,7 +96,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='matrixhawk_sphinx_rtd_theme',
-    version='0.0.2',
+    version='0.1.0',
     
     # 1. 扫描包：自动找到当前目录下的 matrixhawk_sphinx_rtd_theme 文件夹
     packages=find_packages(),
