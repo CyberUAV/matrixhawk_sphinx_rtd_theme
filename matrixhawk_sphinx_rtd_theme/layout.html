@@ -121,6 +121,14 @@
     <link rel="prev" title="{{ prev.title|striptags|e }}" href="{{ prev.link|e }}" />
     {%- endif %}
   {%- endblock %}
+  {#- HREFLANG alternates (SEO) — emitted when html_context provides the i18n keys. #}
+  {%- if languages and url_prefix and wiki_name %}
+    {%- for code, prefix, name in languages %}
+    <link rel="alternate" hreflang="{{ code|replace('_','-') }}" href="/{{ prefix }}/{{ wiki_name }}/{{ pagename }}.html"/>
+    {%- endfor %}
+    <link rel="alternate" hreflang="x-default" href="/en/{{ wiki_name }}/{{ pagename }}.html"/>
+  {%- endif %}
+
   {%- block extrahead %} {% endblock %}
 </head>
 
@@ -231,6 +239,7 @@
     </section>
   </div>
   {% include "versions.html" -%}
+  {% include "language_selector.html" -%}
 
   <script>
       jQuery(function () {

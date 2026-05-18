@@ -1,0 +1,58 @@
+{#-
+  Language selector — reads from html_context populated by each vehicle's conf.py:
+    languages          : [(sphinx_code, url_prefix, display_name), ...]
+    url_prefix         : {sphinx_code -> url_prefix}
+    wiki_name          : html_short_title (e.g. 'copter')
+    current_language   : sphinx code of the build in flight (set by update.py)
+  Links use absolute /{prefix}/{wiki_name}/{pagename}.html so switching keeps you on the same page.
+-#}
+{%- if languages and url_prefix and wiki_name %}
+<style>
+.mh-lang-selector {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 200px;
+  background: rgba(27,27,27,0.95);
+  color: #fcfcfc;
+  font-family: Lato, "Helvetica Neue", Arial, sans-serif;
+  font-size: 90%;
+  z-index: 400;
+  border-top-left-radius: 4px;
+}
+.mh-lang-selector .mh-lang-current {
+  padding: 12px 16px;
+  cursor: pointer;
+  background: #2980b9;
+  color: #fff;
+  display: block;
+}
+.mh-lang-selector .mh-lang-options { display: none; padding: 8px 16px 12px; }
+.mh-lang-selector.open .mh-lang-options { display: block; }
+.mh-lang-selector .mh-lang-options a { color: #fcfcfc; text-decoration: none; display: block; padding: 4px 0; }
+.mh-lang-selector .mh-lang-options a:hover { color: #2980b9; }
+.mh-lang-selector .mh-lang-options dd.current a { color: #27ae60; font-weight: bold; }
+.mh-lang-selector .mh-lang-options dt { margin: 0 0 6px; font-weight: bold; opacity: 0.7; }
+.mh-lang-selector .mh-lang-options dd { margin-left: 0; }
+@media (max-width: 768px) { .mh-lang-selector { display: none; } }
+</style>
+<div class="mh-lang-selector" id="mh-lang-selector">
+  <span class="mh-lang-current" onclick="document.getElementById('mh-lang-selector').classList.toggle('open');">
+    <span class="fa fa-globe"></span>&nbsp;
+    {%- for code, prefix, name in languages -%}
+      {%- if code == current_language %}{{ name }}{%- endif -%}
+    {%- endfor %}
+    &nbsp;<span class="fa fa-caret-down"></span>
+  </span>
+  <div class="mh-lang-options">
+    <dl>
+      <dt>Language / 语言</dt>
+      {%- for code, prefix, name in languages %}
+        <dd{% if code == current_language %} class="current"{% endif %}>
+          <a href="/{{ prefix }}/{{ wiki_name }}/{{ pagename }}.html">{{ name }}</a>
+        </dd>
+      {%- endfor %}
+    </dl>
+  </div>
+</div>
+{%- endif %}
