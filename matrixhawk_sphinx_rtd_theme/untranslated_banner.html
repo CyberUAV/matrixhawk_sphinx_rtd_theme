@@ -1,0 +1,42 @@
+{#-
+  Untranslated-page banner. Reads context populated by mwiki_translation_coverage:
+    page_translation_ratio        float [0,1] or None
+    page_translation_translated   int
+    page_translation_total        int
+  And from each vehicle's conf.py:
+    current_language              e.g. 'zh_CN' (set by update.py env var)
+
+  Shows only on non-English builds, only when ratio is below the threshold.
+  Threshold deliberately high (0.8) so partially-translated pages still
+  warn — gettext fallback means readers see English chunks mixed in.
+-#}
+{%- set _BANNER_THRESHOLD = 0.8 -%}
+{%- if current_language and current_language != 'en'
+       and page_translation_ratio is not none
+       and page_translation_ratio < _BANNER_THRESHOLD -%}
+{%- set _pct = (page_translation_ratio * 100) | round(0, 'floor') | int -%}
+<div class="mh-untranslated-banner" role="status" aria-live="polite">
+  <span class="mh-untranslated-icon">⚠</span>
+  <span class="mh-untranslated-text">
+    本页中文翻译尚不完整（{{ _pct }}% 已译，共 {{ page_translation_total }} 段）。未翻译段落以英文原文显示。
+    <br>
+    <span class="mh-untranslated-sub">This page is not fully translated ({{ _pct }}% done). Untranslated paragraphs are shown in English.</span>
+  </span>
+</div>
+<style>
+.mh-untranslated-banner {
+  background: #fff8e1;
+  border-left: 4px solid #f0ad4e;
+  padding: 12px 16px;
+  margin: 0 0 18px;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 14px;
+  color: #404040;
+  line-height: 1.5;
+}
+.mh-untranslated-icon { font-size: 20px; line-height: 1; flex-shrink: 0; }
+.mh-untranslated-sub { color: #777; font-size: 13px; }
+</style>
+{%- endif -%}
