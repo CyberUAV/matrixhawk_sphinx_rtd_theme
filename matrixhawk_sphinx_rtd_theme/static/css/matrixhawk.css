@@ -77,16 +77,21 @@
   font-size: .8em;
   vertical-align: middle;
 }
+/* #cssmenu prefix beats ardupilot.css's own menu-anchor rules, which
+   otherwise strip the pill padding from the <a> half */
+#cssmenu .mwiki-lang a,
+#cssmenu .mwiki-lang .on,
 .mwiki-lang a,
 .mwiki-lang .on {
-  padding: 3px 12px;
+  padding: 3px 12px !important;
   color: #c9ccd1;
   font-weight: 600;
-  line-height: 1.6;
+  line-height: 1.6 !important;
 }
+#cssmenu .mwiki-lang .on,
 .mwiki-lang .on {
   background: var(--mh-yellow);
-  color: #111;
+  color: #111 !important;
 }
 .mwiki-lang a:hover { color: var(--mh-yellow); }
 
