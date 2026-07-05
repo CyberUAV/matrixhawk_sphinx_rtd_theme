@@ -94,9 +94,20 @@ from setuptools import setup, find_packages
 
 # ... (保留你之前的 Webpack 等 Class 定义，这里省略) ...
 
+# Single source of truth for the version: the package's __init__.py.
+# (setup.py used to say 0.1.0 while the package reported 2.0.0.)
+_here = os.path.abspath(os.path.dirname(__file__))
+_version = {}
+with open(os.path.join(_here, 'matrixhawk_sphinx_rtd_theme', '__init__.py'),
+          encoding='utf-8') as _f:
+    for _line in _f:
+        if _line.startswith('__version__'):
+            _version['v'] = _line.split('=')[1].strip().strip("'\"")
+            break
+
 setup(
     name='matrixhawk_sphinx_rtd_theme',
-    version='0.1.0',
+    version=_version['v'],
     
     # 1. 扫描包：自动找到当前目录下的 matrixhawk_sphinx_rtd_theme 文件夹
     packages=find_packages(),
