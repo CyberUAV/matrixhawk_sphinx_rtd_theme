@@ -1,76 +1,133 @@
-/* Copyright (c) 2025 BZUAV Technology Co., Ltd. */ /* 版权声明 */
-/* Licensed under the MIT License. */ /* MIT开源协议 */
+/* Copyright (c) 2025 BZUAV Technology Co., Ltd. */
+/* Licensed under the MIT License. */
 
-@import url("ardupilot.css"); /* 导入 ardupilot.css，继续导入 theme.css */
+@import url("ardupilot.css"); /* -> theme.css (upstream chain, do not edit those) */
 
 /* ==========================================================================
-   1. 顶部菜单设置
+   matrixhawk skin — Option A: recolor, keep the RTD skeleton.
+   Design tokens shared with the landing page (frontend/css/main.css):
+   black chrome #111, brand yellow #ffcb05, mikroe red #d02600.
+   All overrides live in THIS file; theme.css / ardupilot.css stay pristine
+   so upstream merges are conflict-free.
    ========================================================================== */
-#cssmenu {
-  height: 60px !important; /* 顶部菜单高度设置为60px */
+
+:root {
+  --mh-yellow: #ffcb05;
+  --mh-red: #d02600;
+  --mh-ink: #111111;
+  --mh-ink-2: #1d1d1f;
 }
 
-/* 新增：让菜单列表容器居中，并与下方布局对齐 */
+/* ==========================================================================
+   1. Top menu — black chrome + yellow accent (matches landing header)
+   ========================================================================== */
+#cssmenu {
+  height: 60px !important;
+  background: var(--mh-ink) !important;
+  border-bottom: 3px solid var(--mh-yellow);
+}
+
 #cssmenu > ul {
-  max-width: 1200px !important; /* 菜单最大宽度1200px */
-  margin-left: auto !important; /* 菜单水平居中 */
-  margin-right: auto !important; /* 菜单水平居中 */
-  padding-left: 0 !important; /* 去除左侧内边距 */
-  /* ✅ 关键修改：启用 Flexbox 布局，将菜单项推向右侧 */
-  display: flex !important; /* 使用flex布局 */
-  justify-content: flex-end !important; /* 菜单项整体靠右 */
-  align-items: center !important; /* 菜单项垂直居中 */
-  position: relative !important; /* 让伪元素绝对定位参照此容器 */
-  height: 100%; /* 菜单高度占满父容器 */
+  max-width: 1200px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding-left: 0 !important;
+  display: flex !important;
+  justify-content: flex-end !important;
+  align-items: center !important;
+  position: relative !important;
+  height: 100%;
+  background: transparent !important;
 }
 
 #cssmenu > ul > li > a {
-  padding: 20px 16px !important; /* 设置菜单链接的上下内边距为20px，左右为16px，让点击区域更大 */
-  line-height: 20px !important; /* 设置菜单文字的行高为20px，使文字垂直居中 */
+  padding: 20px 14px !important;
+  line-height: 20px !important;
+  background: transparent !important;
+  color: #e8e9eb !important;
+  font-weight: 600;
 }
 
+#cssmenu > ul > li:hover > a,
+#cssmenu > ul > li > a:hover {
+  color: var(--mh-yellow) !important;
+  background: transparent !important;
+}
+
+/* dropdown panels */
+#cssmenu ul ul {
+  background: var(--mh-ink-2) !important;
+}
+#cssmenu ul ul li a {
+  background: transparent !important;
+  color: #d4d6da !important;
+}
+#cssmenu ul ul li a:hover {
+  background: rgba(255, 203, 5, .12) !important;
+  color: var(--mh-yellow) !important;
+}
+
+/* language pill (rendered by z_top_menu.html) */
+.mwiki-lang-item { margin-left: 10px; }
+.mwiki-lang {
+  display: inline-flex;
+  border: 1px solid #4a4d52;
+  border-radius: 999px;
+  overflow: hidden;
+  font-size: .8em;
+  vertical-align: middle;
+}
+.mwiki-lang a,
+.mwiki-lang .on {
+  padding: 3px 12px;
+  color: #c9ccd1;
+  font-weight: 600;
+  line-height: 1.6;
+}
+.mwiki-lang .on {
+  background: var(--mh-yellow);
+  color: #111;
+}
+.mwiki-lang a:hover { color: var(--mh-yellow); }
+
 /* ==========================================================================
-   2. 布局容器 (父容器) - 负责整体居中
-   逻辑：侧栏(300) + 内容(900) = 总宽(1200)
+   2. Layout container — 300 sidebar + 900 content = 1200, centered
    ========================================================================== */
 .wy-grid-for-nav {
-  position: relative !important; /* 父容器相对定位 */
-  top: 60px !important; /* 顶部偏移60px，避开菜单 */
-  width: 100%; /* 宽度100% */
-  max-width: 1200px !important; /* 最大宽度1200px */
-  margin-left: auto !important; /* 水平居中 */
-  margin-right: auto !important; /* 水平居中 */
-  min-height: calc(100vh - 60px); /* 最小高度为视口高度减去菜单高度 */
+  position: relative !important;
+  top: 60px !important;
+  width: 100%;
+  max-width: 1200px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  min-height: calc(100vh - 60px);
 }
 
 /* ==========================================================================
-   3. 大屏幕布局 (>= 1200px)
-   只有屏幕够宽时，才执行严格的 300+900 布局
+   3. Wide screens (>= 1200px)
    ========================================================================== */
 @media screen and (min-width: 1200px) {
-  
-  /* --- 左侧：侧边栏 (300px) --- */
   .wy-nav-side {
-    position: sticky !important; /* 侧栏吸顶 */
-    top: 60px; /* 距离顶部60px */
-    width: 300px; /* 侧栏宽度300px */
-    height: calc(100vh - 60px); /* 侧栏高度自适应 */
-    float: left; /* 左浮动 */
-    left: 0 !important; /* 靠左 */
-    z-index: 200; /* 层级 */
-    overflow-y: auto; /* 侧栏可滚动 */
+    position: sticky !important;
+    top: 60px;
+    width: 300px;
+    height: calc(100vh - 60px);
+    float: left;
+    left: 0 !important;
+    z-index: 200;
+    overflow-y: auto;
   }
 
-  /* --- 右侧：内容包裹器 --- */
   .wy-nav-content-wrap {
-    margin-left: 300px !important; /* 内容区左边距300px，避开侧栏 */
-    background: rgba(0, 0, 0, .05); /* 内容区灰色背景 */
-    min-height: calc(100vh - 60px); /* 内容区最小高度 */
+    margin-left: 300px !important;
+    background: rgba(0, 0, 0, .05);
+    min-height: calc(100vh - 60px);
   }
+} /* (this brace was missing before — everything below used to be
+     swallowed into the >=1200px media query and never applied) */
 
 /* ==========================================================================
-   4. 平板/中等屏幕 (768px - 1199px)
-   屏幕不够 1200px 时，容器占满全屏，内容自适应
+   4. Tablet (768px - 1199px)
    ========================================================================== */
 @media screen and (min-width: 768px) and (max-width: 1199px) {
   .wy-grid-for-nav {
@@ -92,13 +149,12 @@
   }
 
   .wy-nav-content {
-    max-width: 100% !important; /* 内容区宽度自适应 */
+    max-width: 100% !important;
   }
 }
 
 /* ==========================================================================
-   5. 移动端 (<= 768px)
-   隐藏侧栏，内容全宽
+   5. Mobile (<= 768px) — sidebar off-canvas, content full width
    ========================================================================== */
 @media screen and (max-width: 768px) {
   .wy-grid-for-nav {
@@ -107,91 +163,119 @@
   }
 
   .wy-nav-side {
-    position: fixed !important; /* 侧栏固定定位 */
-    left: -300px !important; /* 侧栏移出屏幕 */
-    top: 60px !important; /* 顶部偏移 */
-    transition: left .2s; /* 左移动画 */
+    position: fixed !important;
+    left: -300px !important;
+    top: 60px !important;
+    transition: left .2s;
   }
 
-  /* 当点击菜单展开侧栏时 (通常会有 .shift 类) */
   .wy-nav-side.shift {
-    left: 0 !important; /* 菜单展开时侧栏归位 */
+    left: 0 !important;
   }
 
   .wy-nav-content-wrap {
-    margin-left: 0 !important; /* 内容区左边距归零 */
+    margin-left: 0 !important;
   }
 
   .wy-nav-content {
-    padding: 1.618em !important; /* 内容区内边距 */
-    margin-left: 0 !important; /* 内容区左边距归零 */
-    max-width: 100% !important; /* 内容区宽度自适应 */
+    padding: 1.618em !important;
+    margin-left: 0 !important;
+    max-width: 100% !important;
   }
 }
 
 /* ==========================================================================
-   临时调试：隐藏面包屑区域
+   6. Sidebar — black header, yellow accents (was RTD blue)
    ========================================================================== */
+.wy-side-nav-search {
+  background-color: var(--mh-ink) !important;
+}
+.wy-side-nav-search > a,
+.wy-side-nav-search .wy-dropdown > a {
+  color: var(--mh-yellow) !important;
+}
+.wy-side-nav-search > div.version {
+  color: #9a9da3 !important;
+}
+.wy-side-nav-search input[type="text"] {
+  border-color: var(--mh-ink) !important;
+}
+.wy-nav-top {
+  background: var(--mh-ink) !important;   /* mobile top strip */
+}
+.wy-nav-top a { color: var(--mh-yellow) !important; }
 
-/* 1. 隐藏面包屑列表 */
+/* current page in the toc: yellow indicator bar */
+.wy-menu-vertical li.current > a,
+.wy-menu-vertical li.on a {
+  border-left: 4px solid var(--mh-yellow) !important;
+}
+
+/* ==========================================================================
+   7. Content accents — links blue -> mikroe red
+   ========================================================================== */
+.wy-nav-content a.internal,
+.wy-nav-content a.external,
+.wy-nav-content a.reference {
+  color: var(--mh-red);
+}
+.wy-nav-content a.internal:hover,
+.wy-nav-content a.external:hover,
+.wy-nav-content a.reference:hover {
+  color: #8f1a00;
+  text-decoration: underline;
+}
+/* keep visited readable, same family */
+.wy-nav-content a.reference:visited { color: #a33; }
+
+/* ==========================================================================
+   8. Breadcrumbs hidden (kept from previous iteration), spacing comp
+   ========================================================================== */
 .wy-breadcrumbs {
-    display: none !important; /* 隐藏面包屑导航 */
+  display: none !important;
 }
-
-/* 2. 隐藏面包屑下方的分割线 (HR) */
-/* 通常面包屑和正文之间有一条横线，也需要隐藏，否则顶部会有奇怪的线条 */
 .wy-nav-content hr {
-    display: none !important; /* 隐藏面包屑下方分割线 */
+  display: none !important;
 }
-
-/* 3. 调整内容区顶部间距 */
-/* 隐藏面包屑后，内容可能会贴顶，加一点 padding 让视觉舒适 */
 .wy-nav-content {
-    padding-top: 40px !important; /* 内容区顶部间距，避免贴顶 */
+  padding-top: 40px !important;
 }
 
 /* ==========================================================================
-   Logo 测试代码 (CSS 方式) - 靠右布局版
+   9. Top-bar logo (pseudo-element, links area starts after it)
    ========================================================================== */
-
-/* 2. 使用伪元素添加 Logo */
 #cssmenu > ul:before {
-  content: ""; /* 伪元素内容为空，用于显示logo */
-  display: block; /* 块级显示 */
-  position: absolute; /* 绝对定位 */
-  left: 0 !important; /* logo始终紧贴菜单栏左侧 */
-  top: 50%; /* 垂直居中 */
-  transform: translateY(-50%); /* 垂直居中修正 */
-  width: 220px; /* logo宽度 */
-  height: 60px; /* logo高度 */
-  background-image: url("../images/matrixhawk-HTML-1.0.svg"); /* logo图片路径 */
-  background-size: contain; /* 图片自适应容器 */
-  background-repeat: no-repeat; /* 不重复 */
-  background-position: left center; /* 图片左侧居中 */
-  z-index: 10; /* 层级 */
-  cursor: pointer; /* 鼠标悬停变手型 */
+  content: "";
+  display: block;
+  position: absolute;
+  left: 0 !important;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 220px;
+  height: 60px;
+  background-image: url("../images/matrixhawk-HTML-1.0.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: left center;
+  z-index: 10;
+  cursor: pointer;
 }
 
-/* 3. 将第一个菜单项 (Home) 的间距重置 */
 #cssmenu > ul > li:first-child {
-  margin-left: 220px !important; /* 第一个菜单项左边距，避让logo宽度 */
+  margin-left: 220px !important;
 }
 
-/* 4. 移动端适配 */
 @media screen and (max-width: 768px) {
-  /* 移动端通常不需要 Flex 靠右，或者需要特殊处理 */
   #cssmenu > ul {
-    display: block !important; /* 移动端菜单恢复块级显示 */
+    display: block !important;
   }
-  
+
   #cssmenu > ul:before {
-    left: 10px !important; /* 移动端logo左边距 */
-    width: 120px; /* 移动端logo宽度 */
+    left: 10px !important;
+    width: 120px;
   }
-  
-  /* 移动端恢复避让间距 */
+
   #cssmenu > ul > li:first-child {
-    margin-left: 130px !important; /* 移动端第一个菜单项左边距，避让logo宽度 */
+    margin-left: 130px !important;
   }
 }
-
