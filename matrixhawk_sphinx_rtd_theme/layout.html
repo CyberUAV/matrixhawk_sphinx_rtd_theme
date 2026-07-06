@@ -122,6 +122,14 @@
     {%- endif %}
   {%- endblock %}
   {%- block extrahead %} {% endblock %}
+  {#- matrixhawk fork: hreflang alternates pairing /en/ and /zh/ copies of
+      this page for search engines. Context comes from each wiki's conf.py
+      (languages/url_prefix/wiki_name); renders nothing when absent. #}
+  {%- if languages and wiki_name %}
+    {%- for code, prefix, name in languages %}
+  <link rel="alternate" hreflang="{{ code|replace('_', '-') }}" href="/{{ prefix }}/{{ wiki_name }}/{{ pagename }}{{ file_suffix }}" />
+    {%- endfor %}
+  {%- endif %}
 </head>
 
 <body class="wy-body-for-nav">
