@@ -121,6 +121,14 @@
     <link rel="prev" title="{{ prev.title|striptags|e }}" href="{{ prev.link|e }}" />
     {%- endif %}
   {%- endblock %}
+  {#- HREFLANG alternates (SEO) — emitted when html_context provides the i18n keys. #}
+  {%- if languages and url_prefix and wiki_name %}
+    {%- for code, prefix, name in languages %}
+    <link rel="alternate" hreflang="{{ code|replace('_','-') }}" href="/{{ prefix }}/{{ wiki_name }}/{{ pagename }}.html"/>
+    {%- endfor %}
+    <link rel="alternate" hreflang="x-default" href="/en/{{ wiki_name }}/{{ pagename }}.html"/>
+  {%- endif %}
+
   {%- block extrahead %} {% endblock %}
   {#- matrixhawk fork: hreflang alternates pairing /en/ and /zh/ copies of
       this page for search engines. Context comes from each wiki's conf.py
@@ -220,6 +228,7 @@
         <div class="rst-content">
         {%- endif %}
           {% include "breadcrumbs.html" %}
+          {% include "untranslated_banner.html" %}
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
           {%- block document %}
            <div itemprop="articleBody">
@@ -239,6 +248,7 @@
     </section>
   </div>
   {% include "versions.html" -%}
+  {% include "language_selector.html" -%}
 
   <script>
       jQuery(function () {
