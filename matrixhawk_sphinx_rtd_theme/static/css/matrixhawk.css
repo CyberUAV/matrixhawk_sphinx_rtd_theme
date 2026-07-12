@@ -25,6 +25,10 @@
   height: 60px !important;
   background: var(--mh-ink) !important;
   border-bottom: 3px solid var(--mh-yellow);
+  /* Above .wy-nav-secondary (z 400), which otherwise overlaps the top
+     25px of the dropdown panels and steals :hover mid-travel, closing
+     them. Below the mobile shift mask (499) and tray (600). */
+  z-index: 450 !important;
 }
 
 #cssmenu > ul {
