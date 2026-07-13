@@ -286,17 +286,107 @@
   margin-left: 220px !important;
 }
 
+/* ==========================================================================
+   10. Mobile menu — CSS-only hamburger collapse
+   Upstream ardupilot.css hides the ul on small screens and expects a
+   JS-injected #menu-button that never existed in this fork; our desktop
+   flex !important then overrode the hide, strewing menu items over the
+   page. A checkbox toggle (landing-header pattern) replaces both.
+   ========================================================================== */
+.mh-nav-toggle,
+.mh-nav-toggle-label {
+  display: none;
+}
+
 @media screen and (max-width: 768px) {
-  #cssmenu > ul {
-    display: block !important;
-  }
-
-  #cssmenu > ul:before {
-    left: 10px !important;
+  /* bar keeps the brand: logo moves off the (now hidden) ul onto the bar */
+  #cssmenu:before {
+    content: "";
+    display: block;
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
     width: 120px;
+    height: 44px;
+    background-image: url("../images/matrixhawk-HTML-1.0.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: left center;
   }
 
-  #cssmenu > ul > li:first-child {
-    margin-left: 130px !important;
+  /* closed: only the bar */
+  #cssmenu > ul {
+    display: none !important;
+  }
+
+  /* hamburger */
+  .mh-nav-toggle-label {
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+    z-index: 20;
+  }
+  .mh-nav-toggle-label span,
+  .mh-nav-toggle-label span::before,
+  .mh-nav-toggle-label span::after {
+    position: absolute;
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: #e8e9eb;
+    left: 18px;
+  }
+  .mh-nav-toggle-label span { top: 29px; }
+  .mh-nav-toggle-label span::before { content: ""; left: 0; top: -8px; }
+  .mh-nav-toggle-label span::after  { content: ""; left: 0; top: 8px; }
+
+  /* open: full-width dark panel under the bar, submenus expanded inline */
+  #cssmenu .mh-nav-toggle:checked ~ ul {
+    display: block !important;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    right: 0;
+    height: auto;
+    max-height: calc(100vh - 60px);
+    overflow-y: auto;
+    background: var(--mh-ink) !important;
+    padding-bottom: 10px;
+    border-bottom: 3px solid var(--mh-yellow);
+  }
+  #cssmenu .mh-nav-toggle:checked ~ ul:before {
+    display: none;                    /* no second logo inside the panel */
+  }
+  #cssmenu .mh-nav-toggle:checked ~ ul > li {
+    float: none;
+    width: 100%;
+    margin-left: 0 !important;
+  }
+  #cssmenu .mh-nav-toggle:checked ~ ul > li > a {
+    padding: 13px 25px !important;
+    line-height: 1.4 !important;
+  }
+  #cssmenu .mh-nav-toggle:checked ~ ul ul {
+    display: block !important;
+    position: relative !important;
+    left: 0 !important;
+    top: auto !important;
+    width: 100% !important;
+    background: var(--mh-ink-2) !important;
+  }
+  #cssmenu .mh-nav-toggle:checked ~ ul ul li {
+    height: auto !important;
+  }
+  #cssmenu .mh-nav-toggle:checked ~ ul ul li a {
+    padding: 10px 25px 10px 40px !important;
+    width: 100%;
+  }
+  .mwiki-lang-item {
+    margin: 8px 0 0 25px;
   }
 }

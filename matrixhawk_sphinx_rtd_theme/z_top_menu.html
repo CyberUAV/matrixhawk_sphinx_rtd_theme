@@ -11,6 +11,11 @@
    deep-links to the same page in the other language. It renders nothing
    when that context is absent, so standalone builds stay clean. #}
 <div id='cssmenu'>
+    {# Mobile hamburger — pure CSS toggle (same checkbox pattern as the
+       landing header). Upstream's collapse expected a JS-injected
+       #menu-button that never existed in this fork. #}
+    <input type="checkbox" id="mh-nav-toggle" class="mh-nav-toggle">
+    <label for="mh-nav-toggle" class="mh-nav-toggle-label" aria-label="menu"><span></span></label>
     <ul>
         <li><a href='{{ target }}index.html'>{{ _('Home') }}</a></li>
 
