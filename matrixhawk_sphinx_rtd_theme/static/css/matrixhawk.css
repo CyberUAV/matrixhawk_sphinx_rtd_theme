@@ -199,6 +199,18 @@
 .wy-side-nav-search {
   background-color: var(--mh-ink) !important;
 }
+/* html_logo otherwise renders at the SVG's intrinsic 58x20 — a postage
+   stamp under the vehicle name. Scale to ~60% of the sidebar so the
+   wordmark (and its tagline) is legible; cap at 80% for narrow shells. */
+.wy-side-nav-search > a img.logo,
+.wy-side-nav-search .wy-dropdown > a img.logo {
+  /* a percentage max-width resolves against the shrink-wrapped <a>,
+     not the sidebar, and undercuts the width — pin both. The sidebar
+     is a fixed 300px on desktop and as the mobile drawer alike. */
+  width: 170px !important;
+  max-width: 170px !important;
+  margin: 10px auto 2px !important;
+}
 .wy-side-nav-search > a,
 .wy-side-nav-search .wy-dropdown > a {
   color: var(--mh-yellow) !important;
