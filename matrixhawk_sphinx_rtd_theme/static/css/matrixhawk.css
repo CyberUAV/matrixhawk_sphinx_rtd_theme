@@ -6,13 +6,13 @@
 /* ==========================================================================
    matrixhawk skin — Option A: recolor, keep the RTD skeleton.
    Design tokens shared with the landing page (frontend/css/main.css):
-   black chrome #111, brand yellow #ffcb05, mikroe red #d02600.
+   black chrome #111, brand yellow #f5c51f (logo wordmark), mikroe red #d02600.
    All overrides live in THIS file; theme.css / ardupilot.css stay pristine
    so upstream merges are conflict-free.
    ========================================================================== */
 
 :root {
-  --mh-yellow: #ffcb05;
+  --mh-yellow: #f5c51f;  /* == logo wordmark yellow; single source */
   --mh-red: #d02600;
   --mh-ink: #111111;
   --mh-ink-2: #1d1d1f;
@@ -233,27 +233,41 @@
 }
 
 /* ==========================================================================
-   7. Content accents — links blue -> mikroe red
+   7. Content accents — links in brand dark amber
+   Red is reserved for warnings: upstream docs use bold red text heavily,
+   and red links were indistinguishable from them. Amber ties links to the
+   brand while keeping >5:1 contrast on white.
    ========================================================================== */
 .wy-nav-content a.internal,
 .wy-nav-content a.external,
 .wy-nav-content a.reference {
-  color: var(--mh-red);
+  color: #a06800;
 }
 .wy-nav-content a.internal:hover,
 .wy-nav-content a.external:hover,
 .wy-nav-content a.reference:hover {
-  color: #8f1a00;
+  color: #7a4f00;
   text-decoration: underline;
 }
 /* keep visited readable, same family */
-.wy-nav-content a.reference:visited { color: #a33; }
+.wy-nav-content a.reference:visited { color: #916a10; }
 
 /* ==========================================================================
    8. Breadcrumbs hidden (kept from previous iteration), spacing comp
    ========================================================================== */
 .wy-breadcrumbs {
   display: none !important;
+}
+/* the fixed gray strip that used to host breadcrumbs — empty since the
+   breadcrumbs were hidden; pure dead chrome (and it hover-stole the
+   dropdowns once). Gone. */
+.wy-nav-secondary {
+  display: none !important;
+}
+/* brand tick on code blocks, echoing the sidebar current-page bar */
+.rst-content div[class*="highlight-"],
+.rst-content pre.literal-block {
+  border-left: 3px solid var(--mh-yellow) !important;
 }
 .wy-nav-content hr {
   display: none !important;
